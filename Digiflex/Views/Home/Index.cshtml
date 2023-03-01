@@ -1,0 +1,263 @@
+﻿@model HomeViewModel
+@inject Digiflex.Services.MainLayoutService services
+@{
+    AppUser user = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        user = await services.GetUser();
+
+    }
+}
+
+<header class="slider">
+    <div class="main-slider">
+        <div class="swiper-wrapper">
+            @foreach (Slider slider in Model.Sliders)
+            {
+                <div class="swiper-slide">
+                    <img class="slide-inner" src="~/uploads/slider/@slider.PosterImageUrl" />
+                    <div class="container" data-swiper-parallax="200">
+                        <h6 class="tagline">NEW RELEASES</h6>
+                        <h2 class="name">
+                            @slider.MovieName
+                        </h2>
+                        <ul class="features">
+                            <li>
+                                <div class="rate">
+                                    <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="circle-chart__background" stroke="#2f3439" stroke-width="2" fill="none" cx="15" cy="15" r="14"></circle>
+                                        <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2" stroke-dasharray="@(slider.ImdbScore*10),100" cx="15" cy="15" r="14"></circle>
+                                    </svg>
+                                    <b>@slider.ImdbScore</b> IMDB SCORE
+                                </div>
+                                <!-- end rate -->
+                            </li>
+                            <li>
+                                <div class="year">@slider.ReleaseYear</div>
+                            </li>
+                            <li>
+                                <div class="hd">
+                                    @((slider.Quality.QualityName == "UHD") ? "4K" : (slider.Quality.QualityName == "FHD") ? "1080P" : (slider.Quality.QualityName == "HD") ? "720P" : "480P") <b>
+                                        @slider.Quality.QualityName
+                                    </b>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tags">@slider.Genre.Name</div>
+                            </li>
+                        </ul>
+                        <p class="description">
+                            @slider.Desc
+                        </p>
+                        <a href="@slider.TraillerUrl" class="play-btn">WATCH TRAILER</a>
+                    </div>
+                    <!-- end container -->
+                </div>
+                <!-- end slide-inner -->
+            }
+        </div>
+        <!-- end swiper-wrapper -->
+        <div class="swiper-pagination"></div>
+        <!-- end swiper-pagination -->
+    </div>
+    <!-- end main-slider -->
+</header>
+<!-- end slider -->
+<main>
+    <section class="content-section" data-background="#111111">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center light">
+                        <h6>FIND ANYWHERE ELSE</h6>
+                        <h2>FEATURED MOVIES</h2>
+                    </div>
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+                @for (int i = 1; i <= 12; i++)
+                {
+                    Movie featuredMovie = Model.FeaturedMovies.FirstOrDefault(x => x.Order == i);
+                    if (featuredMovie is not null)
+                    {
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <div class="video-thumb light">
+
+                                <figure class="video-image">
+                                    <img src="~/uploads/movie/@featuredMovie.PosterImageUrl" alt="Image">
+
+                                    <div class="circle-rate">
+                                        <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="circle-chart__background" stroke="#2f3439" stroke-width="2" fill="none" cx="15" cy="15" r="14"></circle>
+                                            <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2" stroke-dasharray="@(featuredMovie.ImdbScore*10),100" cx="15" cy="15" r="14"></circle>
+                                        </svg>
+                                        <b>@featuredMovie.ImdbScore</b>
+                                    </div>
+                                    <!-- end circle-rate -->
+                                    <div class="hd">
+                                        @((featuredMovie.Quality.QualityName == "UHD") ? "4K" : (featuredMovie.Quality.QualityName == "FHD") ? "1080P" : (featuredMovie.Quality.QualityName == "HD") ? "720P" : "480P") <b>
+                                            @featuredMovie.Quality.QualityName
+                                        </b>
+                                    </div>
+                                    <!-- end hd -->
+                                </figure>
+                                <div class="video-content">
+                                    <small class="range">@featuredMovie.VideoLength min,</small>
+                                    @if (featuredMovie.MovieGenres.Count > 0)
+                                    {
+                                        <ul class="tags" style="color:red">
+                                            @featuredMovie.MovieGenres.FirstOrDefault().Genre.Name
+                                        </ul>
+                                    }
+                                    <!-- end age -->
+                                    @if (User.Identity.IsAuthenticated == false)
+                                    {
+                                        <h3 class="name"><a asp-action="login" asp-controller="account">@featuredMovie.Name</a></h3>
+                                    }
+                                    else
+                                    {
+                                        if (user.IsSubscribed == true)
+                                        {
+                                            <h3 class="name"><a asp-action="moviedetail" asp-controller="movie" asp-route-id="@featuredMovie.Id">@featuredMovie.Name</a></h3>
+                                        }
+                                        else
+                                        {
+                                            <h3 class="name"><a asp-action="payment" asp-controller="account">@featuredMovie.Name</a></h3>
+
+                                        }
+                                    }
+                                </div>
+                                <!-- end video-content -->
+                            </div>
+                            <!-- end video-thumb -->
+                        </div>
+                    }
+
+                }
+                <div class="col-12 text-center"> <a asp-action="index" asp-controller="movie" class="custom-button">BROWSE ALL MOVIES</a> </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end content-section -->
+    <section class="content-section no-top-spacing">
+        <div class="container">
+            <div class="row align-items-center no-gutters">
+                <div class="col-lg-6">
+                    <figure class="side-image full-left"> <img src="~/uploads/about/@Model.Abouts.FirstOrDefault().ImageUrl" alt="Image"> </figure>
+                    <!-- end side-image -->
+                </div>
+                <!-- end col-6 -->
+                <div class="col-lg-6">
+                    <div class="side-content right">
+                        <h2>@Model.Abouts.FirstOrDefault().MainTitle</h2>
+                        <ul class="icon-list">
+                            @foreach (Service service in Model.Services)
+                            {
+                                <li>
+                                    <figure> <img src="~/uploads/service/@service.IconImageUrl" alt="Image"> </figure>
+                                    <div class="content">
+                                        <h4>@service.Title</h4>
+                                        <p>
+                                            @service.Desc
+                                        </p>
+                                    </div>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                    <!-- end side-content -->
+                </div>
+                <!-- end col-6 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end content-section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="testimonial">
+                        <h2>
+                            @Model.Testimonials.FirstOrDefault().Title
+                        </h2>
+                        <blockquote>
+                            @Model.Testimonials.FirstOrDefault().Desc
+
+                        </blockquote>
+                        <figure> <img src="~/uploads/testimonial/@Model.Testimonials.FirstOrDefault().AvatarUrl" alt="Image"> <img src="~/uploads/testimonial/@Model.Testimonials.FirstOrDefault().LogoUrl" alt="Image"> </figure>
+                        <h6>
+                            Ulvi Adilov <br>
+                            <small>Software developer</small>
+                        </h6>
+                    </div>
+                    <!-- end testimonial -->
+                </div>
+                <!-- end col-7 -->
+                <div class="col-lg-5">
+                    <figure class="side-image"> <img src="~/uploads/testimonial/@Model.Testimonials.FirstOrDefault().ImageUrl" alt="Image"> </figure>
+                    <!-- end side-image -->
+                </div>
+                <!-- end col-5 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end content-section -->
+    @if (User.Identity.IsAuthenticated == false || user.IsSubscribed == false)
+    {
+        <section class="content-section">
+            <div class="video-bg">
+                <video src="~/uploads/plan/@Model.PaymentPlans.FirstOrDefault().BackgroudVideoUrl" autoplay muted playsinline loop></video>
+            </div>
+            <!-- end video-bg -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center light">
+                            <h6>START SECURE BROWSING</h6>
+                            <h2>Ready to Grab the deal?</h2>
+                        </div>
+                        <!-- end section-title -->
+                    </div>
+                    <!-- end col-12 -->
+                </div>
+                <!-- end row -->
+                <div class="row">
+
+                    <!-- end col-4 -->
+                    <div class="col-12" style="display:flex; justify-content:center;">
+                        <div class="col-lg-6">
+                            <div class="price-box">
+                                <figure class="icon"><img src="~/assets/images/@Model.PaymentPlans.FirstOrDefault().IconUrl" alt="Image"></figure>
+                                <div class="months">@Model.PaymentPlans.FirstOrDefault().PlanTitle</div>
+                                <div class="price"><span>$</span> <b>@Model.PaymentPlans.FirstOrDefault().Price</b> <small>per month</small> </div>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-action="payment" asp-controller="account" asp-route-id="@user.Id">GET THE DEAL</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="login" asp-controller="account">GET THE DEAL</a>
+                                }
+                            </div>
+                            <!-- end price-box -->
+                        </div>
+                        <div />
+
+                        <!-- end col-4 -->
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+        </section>
+    }
+</main>
+

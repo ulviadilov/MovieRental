@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="~/assets/images/logo.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: rgba(0, 0, 0, .80) url("https://wallpapercave.com/wp/wp10035303.jpg");
+            background-blend-mode: darken;
+            background-repeat: no-repeat;
+            background-size : 100% 
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: white;
+            text-align: center;
+        }
+
+
+            .container button {
+                margin-top: 30px;
+                border-radius: 20px;
+                margin-right: 20px;
+                padding: 20px 40px;
+                font-size: 30px;
+                background-color: #e90101;
+                color: white;
+                font-weight: 100;
+                transition: ease-in-out 0.3s;
+                cursor: pointer;
+            }
+
+        button:hover {
+            background-color: #ae0707;
+        }
+
+        img {
+            width: 50px;
+            margin-top: 30px;
+            margin-left: 50px;
+        }
+
+        .header {
+            font-weight: 2000;
+            font-size: 30px;
+        }
+
+        .paragraph {
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        .sign {
+            font-weight: 100;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+    <title>Digiflex</title>
+</head>
+<body>
+    
+    <a asp-action="index" asp-controller="home"><img src="~/assets/images/logo.png" alt=""></a>
+    <div class="container">
+        <div class="header"><h1>WELCOME TO DIGIFLEX</h1></div>
+        <p class="paragraph">Get Digiflex all with ads, for $14.99/month.</p>
+        <div class="buttons">
+            <button class="sign"><a asp-action="login" asp-controller="account">Sign In</a></button>
+            <button class="sign"><a asp-action="register" asp-controller="account">Sign Up</a></button>
+        </div>
+    </div>
+
+</body>
+</html>

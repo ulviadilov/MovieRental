@@ -1,0 +1,33 @@
+﻿@model Service
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Update About</h1>
+            <form method="post" asp-action="update" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Desc" class="form-label">Descripton</label>
+                    <input asp-for="Desc" class="form-control">
+                    <span asp-validation-for="Desc" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="IconImageFile" class="form-label">Icon Image</label>
+                    <input asp-for="IconImageFile" class="form-control">
+                    <span asp-validation-for="IconImageFile" class="text-danger"></span>
+                    <input asp-for="IconImageUrl" type="hidden" value="@Model.IconImageUrl" />
+                </div>
+                <div style="width:200px">
+                    <img style="max-width:100%" src="~/uploads/about/@Model.IconImageUrl">
+                </div>
+
+                <hr class="border-bottom-danger"></hr>
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

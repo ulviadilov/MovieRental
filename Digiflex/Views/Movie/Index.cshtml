@@ -1,0 +1,118 @@
+﻿@inject Digiflex.Services.MainLayoutService service
+@model MovieMainViewModel
+@{
+    AppUser user = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        user = await service.GetUser();
+    }
+    int counter = (Model.Movies.ActivePage - 1) * 5;
+}
+<header class="page-header">
+    <div class="container">
+        <h1>Movies</h1>
+    </div>
+</header>
+<!-- end page-header -->
+<main>
+    <section class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h6>FIND ANYWHERE ELSE</h6>
+                        <h2>Movies For You</h2>
+                    </div>
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+                @foreach (Movie movie in Model.Movies)
+                {
+                    counter++;
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                        <div class="video-thumb">
+
+                            
+                                <figure class="video-image">
+                                <img src="~/uploads/movie/@movie.PosterImageUrl" alt="Image">
+                                    <div class="circle-rate">
+                                        <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="circle-chart__background" stroke="#2f3439" stroke-width="2" fill="none" cx="15" cy="15" r="14"></circle>
+                                            <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2" stroke-dasharray="@(movie.ImdbScore*10),100" cx="15" cy="15" r="14"></circle>
+                                        </svg>
+                                        <b>@movie.ImdbScore</b>
+                                    </div>
+                                    <!-- end circle-rate -->
+                                    <div class="hd">
+                                        @((movie.Quality.QualityName == "UHD") ? "4K" : (movie.Quality.QualityName == "FHD") ? "1080P" : (movie.Quality.QualityName == "HD") ? "720P" : "480P") <b>
+                                            @movie.Quality.QualityName
+                                        </b>
+                                    </div>
+                                    <!-- end hd -->
+                                </figure>
+                            
+                            <div class="video-content">
+                                <small class="range">@movie.VideoLength min,</small>
+                                @if (movie.MovieGenres.Count > 0)
+                                {
+                                    <ul class="tags" style="color:red">
+                                        @movie.MovieGenres.FirstOrDefault().Genre.Name
+                                    </ul>
+                                }
+                                <!-- end age -->
+                                @if (User.Identity.IsAuthenticated == false)
+                                {
+                                    <h3 class="name"><a asp-action="login" asp-controller="account">@movie.Name</a></h3>
+                                }
+                                else
+                                {
+                                    if (user.IsSubscribed == true)
+                                    {
+                                        <h3 class="name"><a asp-action="moviedetail" asp-controller="movie" asp-route-id="@movie.Id">@movie.Name</a></h3>
+                                    }
+                                    else
+                                    {
+                                        <h3 class="name"><a asp-action="payment" asp-controller="account">@movie.Name</a></h3>
+
+                                    }
+                                }
+                            </div>
+                            <!-- end video-content -->
+                        </div>
+                        <!-- end video-thumb -->
+                    </div>
+                }
+
+                <!-- end col-2 -->
+            </div>
+        </div>
+        <!-- end container -->
+        
+            <div class="col-12" style="display:flex; justify-content:center">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        @if (Model.Movies.HasPrevious)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="index" asp-route-page="@(Model.Movies.ActivePage-1)">Previous</a>
+
+                            </li>
+                        }
+                        @for (int i = 1; i <= Model.Movies.TotalPageCount; i++)
+                        {
+                            <li class="page-item @(Model.Movies.ActivePage == i ? "active" : "" )"><a asp-action="index" asp-route-page="@i" class="page-link">@i</a></li>
+                        }
+                        @if (Model.Movies.HasNext)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="index" asp-route-page="@(Model.Movies.ActivePage+1)">Next</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        
+    </section>
+    <!-- end content-section -->
+
+

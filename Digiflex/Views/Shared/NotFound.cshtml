@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="~/assets/images/logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: rgba(0, 0, 0, .90) url("https://media.tenor.com/cqm2X5OvcYIAAAAC/white-noise.gif");
+            background-blend-mode: darken;
+        }
+        .link{
+            text-decoration:none;
+            color:white;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: white;
+            text-align: center;
+        }
+
+
+            .container button {
+                margin-top: 50px;
+                padding: 20px 40px;
+                font-size: 50px;
+                background-color: #e90101;
+                color: white;
+                font-weight: 900;
+                transition: ease-in-out 0.3s;
+                cursor: pointer;
+            }
+
+        button:hover {
+            background-color: #ae0707;
+        }
+
+        img {
+            width: 50px;
+            margin-top: 30px;
+            margin-left: 50px;
+        }
+
+        .notfound {
+            font-weight: 900;
+            margin-left: 120px;
+            font-size: 150px;
+            width: 400px;
+        }
+
+        .text {
+            font-size: 70px;
+        }
+    </style>
+    <title>Digiflex</title>
+</head>
+<body>
+    <a asp-action="index" asp-controller="home">
+        <img src="~/assets/images/logo.png" alt="">
+
+    </a>
+    <div class="container">
+        <h1 class="notfound">404</h1>
+        <h1 class="text">PAGE NOT FOUND</h1>
+        <button><a asp-action="index" asp-controller="home" class="link">Home Page</a></button>
+    </div>
+
+</body>
+</html>

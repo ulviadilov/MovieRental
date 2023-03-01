@@ -1,0 +1,56 @@
+﻿@model Testimonial
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Update Testimonial</h1>
+            <form method="post" asp-action="update" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Desc" class="form-label">Description</label>
+                    <textarea class="form-control" asp-for="Desc" rows="3"></textarea>
+                    <span asp-validation-for="Desc" style="color: red"></span>
+                </div>
+
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="AvatarFile" class="form-label">Avatar Image</label>
+                    <input asp-for="AvatarFile" class="form-control">
+                    <span asp-validation-for="AvatarFile" class="text-danger"></span>
+                    <input asp-for="AvatarUrl" type="hidden" value="@Model.AvatarUrl" />
+
+                </div>
+                <div style="width:200px">
+                    <img style="max-width:100%" src="~/uploads/testimonial/@Model.AvatarUrl">
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="LogoFile" class="form-label">Logo Image</label>
+                    <input asp-for="LogoFile" class="form-control">
+                    <span asp-validation-for="LogoFile" class="text-danger"></span>
+                    <input asp-for="LogoUrl" type="hidden" value="@Model.LogoUrl" />
+
+                </div>
+                <div style="width:200px">
+                    <img style="max-width:100%" src="~/uploads/testimonial/@Model.LogoUrl">
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="ImageFile" class="form-label">Image</label>
+                    <input asp-for="ImageFile" class="form-control">
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    <input asp-for="ImageUrl" type="hidden" value="@Model.ImageUrl" />
+
+                </div>
+                <div style="width:200px">
+                    <img style="max-width:100%" src="~/uploads/testimonial/@Model.ImageUrl">
+                </div>
+
+                <hr class="border-bottom-danger"></hr>
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

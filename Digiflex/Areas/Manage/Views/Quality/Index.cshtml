@@ -1,0 +1,71 @@
+﻿@model PaginatedList<Quality>
+@{
+        int counter = (Model.ActivePage-1)*5;
+
+}
+@section css{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Movie Qualities</h1>
+            <a asp-action="create" class="btn btn-outline-primary">Create</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Quality</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Quality quality in Model)
+                    {
+                        counter++;
+                        <tr>
+                            <th scope="row">@counter</th>
+                            <td>@quality.QualityName</td>
+                            <td>
+                                <a asp-action="update" asp-controller="language" asp-route-id="@quality.Id" class="btn btn-outline-primary">Update</a>
+                                <a asp-action="delete" asp-controller="language" asp-route-id="@quality.Id" class="btn btn-outline-danger delete-button">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            
+                <div class="col-12" style="display:flex; justify-content:center">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            @if (Model.HasPrevious)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage-1)">Previous</a>
+
+                                </li>
+                            }
+                            @for (int i = 1; i <= Model.TotalPageCount; i++)
+                            {
+                                <li class="page-item @(Model.ActivePage == i ? "active" : "" )"><a asp-action="index" asp-route-page="@i" class="page-link">@i</a></li>
+                            }
+                            @if (Model.HasNext)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage+1)">Next</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.js" integrity="sha512-IYzd4A07K9kxY3b8YIXi8L0BmUPVvPlI+YpLOzKrIKA3sQ4gt43dYp+y6ip7C7LRLXYfMHikpxeprZh7dYQn+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    }

@@ -1,0 +1,199 @@
+﻿@model MovieDetailViewModel
+</section>
+<main>
+    <header class="page-header single">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="video-player">
+                        <a asp-action="index" asp-controller="movie" class="back-btn"><i class="lni lni-chevron-left"></i> BACK</a>
+                        <video src="~/uploads/movievideo/@Model.Movie.VideoUrl" poster="~/uploads/movie/@Model.Movie.ThumbnailUrl" controls playsinline></video>
+                    </div>
+                    <!-- end video-player -->
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end col-12 -->
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </header>
+    <!-- end header -->
+    <section class="content-section" data-background="#ffffff">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="movie-info-box">
+                        <h2 class="name">@Model.Movie.Name</h2>
+                        <ul class="features">
+                            <li>
+                                <div><b>IMDB SCORE </b>  <b style="color:coral">@Model.Movie.ImdbScore</b></div>
+                            </li>
+
+                            <li>
+                                <div class="hd">
+                                    @((Model.Movie.Quality.QualityName == "UHD") ? "4K" : (Model.Movie.Quality.QualityName == "FHD") ? "1080P" : (Model.Movie.Quality.QualityName == "HD") ? "720P" : "480P") <b>
+                                        @Model.Movie.Quality.QualityName
+                                    </b>
+                                </div>
+                            </li>
+                            @if (Model.Movie.MovieGenres.Count > 0)
+                            {
+                                <li>
+                                    <div class="tags">
+                                        @foreach (MovieGenre item in Model.Movie.MovieGenres)
+                                        {
+                                            <span>@item.Genre.Name</span>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <p class="description">
+                            @Model.Movie.Desc
+                        </p>
+
+                    </div>
+                    <!-- end movie-info-box -->
+                </div>
+                <!-- end col-8 -->
+                <div class="col-lg-4">
+                    <div class="movie-side-info-box">
+                        <figure><img src="~/uploads/movie/@Model.Movie.PosterImageUrl" alt="Image"></figure>
+                        <ul>
+                            <li><strong>Release release: </strong> @Model.Movie.ReleaseDate.ToString("dd/MM/yyyy")</li>
+                            <li><strong>Director:</strong> @Model.Movie.DirectorName</li>
+                            <li><strong>Country:</strong>@Model.Movie.Country.Name</li>
+                            <li><strong>Language:</strong>@Model.Movie.Language.LanguageName</li>
+                        </ul>
+                    </div>
+                    <!-- end movie-side-info-box -->
+                </div>
+                <!-- end col-4 -->
+            </div>
+            <!-- end col-12 -->
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end content-section -->
+    <section class="content-section" data-background="#111111">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title light">
+                        <h6>FIND ANYWHERE ELSE</h6>
+                        <h2>Related Movies</h2>
+                    </div>
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+                @for (int i = 1; i <= 6; i++)
+                {
+                    Movie relatedMovie = Model.RelatedMovies.FirstOrDefault(x => x.Order == i);
+                    if (relatedMovie is not null)
+                    {
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <div class="video-thumb light">
+                                <a asp-action="moviedetail" asp-controller="movie" asp-route-id="@relatedMovie.Id">
+                                    <figure class="video-image">
+                                        <img src="~/uploads/movie/@relatedMovie.PosterImageUrl" alt="Image">
+
+                                        <div class="circle-rate">
+                                            <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                                <circle class="circle-chart__background" stroke="#2f3439" stroke-width="2" fill="none" cx="15" cy="15" r="14"></circle>
+                                                <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2" stroke-dasharray="@(relatedMovie.ImdbScore*10),100" cx="15" cy="15" r="14"></circle>
+                                            </svg>
+                                            <b>@relatedMovie.ImdbScore</b>
+                                        </div>
+                                        <!-- end circle-rate -->
+                                        <div class="hd">
+                                            @((relatedMovie.Quality.QualityName == "UHD") ? "4K" : (relatedMovie.Quality.QualityName == "FHD") ? "1080P" : (relatedMovie.Quality.QualityName == "HD") ? "720P" : "480P") <b>
+                                                @relatedMovie.Quality.QualityName
+                                            </b>
+                                        </div>
+                                        <!-- end hd -->
+                                    </figure>
+                                </a>
+                                <div class="video-content">
+                                    <small class="range">@relatedMovie.VideoLength min,</small>
+                                    @if (relatedMovie.MovieGenres.Count > 0)
+                                    {
+                                        <ul class="tags" style="color:red">
+                                            @relatedMovie.MovieGenres.FirstOrDefault().Genre.Name
+                                        </ul>
+                                    }
+                                    <!-- end age -->
+                                    <h3 class="name"><a asp-action="moviedetail" asp-controller="movie" asp-route-id="@relatedMovie.Id">@relatedMovie.Name</a></h3>
+
+                                </div>
+                                <!-- end video-content -->
+                            </div>
+                            <!-- end video-thumb -->
+                        </div>
+
+                    }
+                }
+                <div class="col-12 text-center"> <a asp-action="index" asp-controller="movie" class="custom-button">BROWSE ALL MOVIES</a> </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end content-section -->
+    <section class="content-section" data-background="#ffffff">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h6>SHARE WITH US</h6>
+                        <h2>All Comments</h2>
+                    </div>
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+                <div class="col-12">
+                    <div class="comments">
+                        <ul class="comments-list">
+                            @foreach (var item in Model.Comments.OrderByDescending(x => x.CreateTime).Take(5))
+                            {
+                                <li>
+                                    <figure class="avatar"><img src="~/uploads/user/@item.User.ProfilePhotoUrl" alt="Image"></figure>
+                                    <div class="comment">
+                                        <h6>@item.User.UserName</h6>
+                                        <p>@item.CommentString</p>
+                                        <small>@item.CreateTime</small>
+                                    </div>
+                                    <!-- end comment -->
+                                </li>
+                            }
+                        </ul>
+                        <form method="post" asp-action="comment" asp-controller="movie">
+                            <div class="comments-form">
+                                <h5>Comment</h5>
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <input type="hidden" asp-for="@Model.Comment.UserId" value="@Model.UserId">
+                                        <input type="hidden" asp-for="@Model.Comment.MovieId" value="@Model.Movie.Id">
+                                        <input placeholder="Comment.."  asp-for="Comment.CommentString"></input>
+                                        <span asp-validation-for="Comment.CommentString" style="color: red"></span>
+                                    </div>
+                                </div>
+                                <!-- end form-group -->
+                                <div class="form-group">
+                                    <button class="comment-button"  type="submit">Post Comment</button>
+                                </div>
+                                <!-- end form-group -->
+                            </div>
+                        </form>
+                        <!-- end comments-form -->
+                    </div>
+                    <!-- end comments -->
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>

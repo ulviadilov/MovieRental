@@ -1,0 +1,17 @@
+﻿@model Country
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Create Movie Country</h1>
+            <form method="post" asp-action="create">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>  
+                <button type="submit" class="btn btn-outline-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

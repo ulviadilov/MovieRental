@@ -1,0 +1,39 @@
+﻿@model PaymentPlan
+
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Payment Plan</h1>
+            <form method="post" asp-action="update" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="BackgroundVideoFile" class="form-label">Background Video</label>
+                    <input asp-for="BackgroundVideoFile" class="form-control">
+                    <span asp-validation-for="BackgroundVideoFile" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PlanTitle" class="form-label">Plan Title </label>
+                    <input asp-for="PlanTitle" class="form-control">
+                    <span asp-validation-for="PlanTitle" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="IconFile" class="form-label">Icon</label>
+                    <input asp-for="IconFile" class="form-control">
+                    <span asp-validation-for="IconFile" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label">Price</label>
+                    <input asp-for="Price" class="form-control">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

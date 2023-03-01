@@ -1,0 +1,17 @@
+﻿@model Language
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Create Movie Language</h1>
+            <form method="post" asp-action="create">
+                <div class="mb-3">
+                    <label asp-for="LanguageName" class="form-label">Language Name</label>
+                    <input asp-for="LanguageName" class="form-control">
+                    <span asp-validation-for="LanguageName" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

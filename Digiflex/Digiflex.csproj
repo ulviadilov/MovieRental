@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\device\" />
+    <Folder Include="wwwroot\uploads\contact\" />
+    <Folder Include="wwwroot\uploads\movie\" />
+    <Folder Include="wwwroot\uploads\movievideo\" />
+    <Folder Include="wwwroot\uploads\user\" />
+    <Folder Include="wwwroot\uploads\testimonial\" />
+    <Folder Include="wwwroot\uploads\service\" />
+    <Folder Include="wwwroot\uploads\slider\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+    <PackageReference Include="Stripe.net" Version="41.7.0" />
+  </ItemGroup>
+
+</Project>

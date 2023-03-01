@@ -1,0 +1,42 @@
+﻿@model List<Device>
+<header class="page-header">
+    <div class="container">
+    <h1>Devices</h1>
+    </div>
+    </header>
+<!-- end page-header -->
+<main>
+  <section class="content-section">
+    <div class="container">
+      <div class="row">
+             <div class="col-12">
+          <div class="section-title text-center">
+              <h6>PLATFORM SUPPORT</h6>
+            <h2>Compatible Devices</h2>
+          </div>
+          <!-- end section-title --> 
+        </div>
+        <!-- end col-12 -->
+        @foreach (Device device in Model)
+                {
+          <div class="col-md-6">
+              <div class="devices-box">
+              <figure>
+                <img src="~/uploads/device/@device.IconUrl" alt="Image">
+                </figure>
+                <h5>@device.Title</h5>
+                <p>@device.Description</p>
+                
+              </div>
+              <!-- end devices-box -->
+          </div>
+                    
+                }
+          <!-- end col-6 -->
+        </div>   
+      <!-- end row --> 
+    </div>
+    <!-- end container --> 
+  </section>
+  <!-- end content-section -->
+ 

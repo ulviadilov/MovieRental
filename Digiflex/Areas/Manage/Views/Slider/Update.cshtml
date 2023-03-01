@@ -1,0 +1,71 @@
+﻿@model Slider
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Update Slider</h1>
+            <form method="post" asp-action="update" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="MovieName" class="form-label">Movie Name</label>
+                    <input asp-for="MovieName" class="form-control">
+                    <span asp-validation-for="MovieName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ReleaseYear" class="form-label">Release year</label>
+                    <input asp-for="ReleaseYear" class="form-control">
+                    <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImdbScore" class="form-label">IMDB Score</label>
+                    <input asp-for="ImdbScore" class="form-control">
+                    <span asp-validation-for="ImdbScore" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Desc" class="form-label">Description</label>
+                    <textarea class="form-control" asp-for="Desc" rows="3"></textarea>
+                    <span asp-validation-for="Desc" style="color: red"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="TraillerUrl" class="form-label">Trailler URL</label>
+                    <input asp-for="TraillerUrl" class="form-control">
+                    <span asp-validation-for="TraillerUrl" class="text-danger"></span>
+                </div>
+                <h5 style="color:red">Recommendation: Upload 1920:1080 size image </h5>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="PosterImageFile" class="form-label">Poster Image</label>
+                    <input asp-for="PosterImageFile" class="form-control">
+                    <span asp-validation-for="PosterImageFile" class="text-danger"></span>
+                    <input asp-for="PosterImageUrl" type="hidden" value="@Model.PosterImageUrl" />
+                </div>
+                <div style="width:200px">
+                    <img style="max-width:100%" src="~/uploads/slider/@Model.PosterImageUrl">
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="GenreId" class="form-label">Genre</label>
+                    <select class="form-select" aria-label="Default select example" asp-for="GenreId">
+                        @foreach (Genre genre in ViewBag.Genres)
+                        {
+                            <option value="@genre.Id">@genre.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="GenreId" style="color: red"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="QualityId" class="form-label">Quality</label>
+                    <select class="form-select" aria-label="Default select example" asp-for="QualityId">
+                        @foreach (Quality quality in ViewBag.Qualities)
+                        {
+                            <option value="@quality.Id">@quality.QualityName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="QualityId" style="color: red"></span>
+                </div>
+
+                <hr class="border-bottom-danger"></hr>
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

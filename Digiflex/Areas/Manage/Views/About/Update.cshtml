@@ -1,0 +1,29 @@
+﻿@model About
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Update About</h1>
+            <form method="post" asp-action="update" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="MainTitle" class="form-label">Main title</label>
+                    <input asp-for="MainTitle" class="form-control">
+                    <span asp-validation-for="MainTitle" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="ImageFile" class="form-label">Image</label>
+                    <input asp-for="ImageFile" class="form-control">
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    <input asp-for="ImageUrl" type="hidden" value="@Model.ImageUrl"/>
+                </div>
+                <div style="width:200px">
+                    <img style="max-width:100%" src="~/uploads/about/@Model.ImageUrl">
+                </div>
+
+                <hr class="border-bottom-danger"></hr>
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

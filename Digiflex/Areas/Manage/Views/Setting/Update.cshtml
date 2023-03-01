@@ -1,0 +1,16 @@
+﻿@model Setting
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <form method="post" asp-action="update">
+                <div class="mb-3">
+                    <label asp-for="Value" class="form-label">Value</label>
+                    <input asp-for="Value" class="form-control" >
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>  
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

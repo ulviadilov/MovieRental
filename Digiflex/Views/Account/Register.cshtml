@@ -1,0 +1,75 @@
+﻿@model MemberRegisterViewModel
+</section>
+<header class="page-header">
+    <div class="container">
+        <h1>Account</h1>
+    </div>
+</header>
+<!-- end page-header -->
+<main>
+    <section class="content-section" data-background="images/section-pattern01.png">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="membership">
+                        <h6>Start Your Membership</h6>
+                        <form asp-action="register" asp-controller="account" method="post">
+                            <div class="form-group">
+                                <label asp-for="Fullname">Full Name</label>
+                                <input asp-for=Fullname class="mb-0 form-control"
+                                       placeholder="Enter your full name">
+                                <span asp-validation-for="Fullname" class="text-danger"></span>
+                            </div>
+                            <!-- end form-group -->
+                            <div class="form-group">
+                                <label asp-for="Username">Username</label>
+                                <input asp-for=Username class="mb-0 form-control"
+                                       placeholder="Enter your username">
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <!-- end form-group -->
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for=Email class="mb-0 form-control"
+                                       placeholder="Enter your email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password">Password</label>
+                                <input asp-for=Password class="mb-0 form-control" placeholder="Enter Your Password">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ConfirmPassword">Confirm Password</label>
+                                <input asp-for=ConfirmPassword class="mb-0 form-control" placeholder="Repeat your password">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <!-- end form-group -->
+                            
+                            <div class="form-group">
+                                <input type="submit" value="START MEMBERSHIP">
+                            </div>
+                            <!-- end form-group -->
+                        </form>
+                        
+                        <div class="form-group">
+                            Do you have an account ?
+                            </br>
+                            <a class="btn btn-outline-danger" asp-action="login" asp-controller="account">Sign In</a>
+                        </div>
+                    </div>
+                    <!-- end membership -->
+                </div>
+                <!-- end col-7 -->
+                <div class="col-lg-5">
+                    <figure class="side-image">
+                        <img src="~/assets/images/cinema-movie-time-concept-show-seats-popcorn-filmstrip-tickets-theater-object-curtain-background-vintage-retro-colors-103014181.jpg" alt="Image">
+                    </figure>
+                    <!-- end side-image -->
+                </div>
+                <!-- end col-5 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>

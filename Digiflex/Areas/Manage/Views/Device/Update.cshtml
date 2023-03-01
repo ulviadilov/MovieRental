@@ -1,0 +1,32 @@
+﻿@model Device
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Update Device</h1>
+            <form method="post" asp-action="update" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Descripton</label>
+                    <input asp-for="Description" class="form-control">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="IconFile" class="form-label">Icon Image</label>
+                    <input asp-for="IconFile" class="form-control">
+                    <span asp-validation-for="IconFile" class="text-danger"></span>
+                </div>
+                <div style="width:100px">
+                                    <img style="max-width:100%" src="~/uploads/device/@Model.IconUrl">
+                                </div>
+
+                <hr class="border-bottom-danger"></hr>
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

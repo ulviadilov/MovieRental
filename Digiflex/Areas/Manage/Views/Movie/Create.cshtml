@@ -1,0 +1,121 @@
+﻿@model MovieViewModel
+
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Create Movie</h1>
+            <form method="post" asp-action="create" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DirectorName" class="form-label">Director name</label>
+                    <input asp-for="DirectorName" class="form-control">
+                    <span asp-validation-for="DirectorName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImdbScore" class="form-label">IMDB Score</label>
+                    <input asp-for="ImdbScore" class="form-control">
+                    <span asp-validation-for="ImdbScore" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Order" class="form-label">Order</label>
+                    <input asp-for="Order" class="form-control">
+                    <span asp-validation-for="Order" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="VideoLength" class="form-label">Movie Length</label>
+                    <input asp-for="VideoLength" class="form-control">
+                    <span asp-validation-for="VideoLength" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Desc" class="form-label">Description</label>
+                    <textarea class="form-control" asp-for="Desc" ></textarea>
+                    <span asp-validation-for="Desc" style="color: red"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="TraillerUrl" class="form-label">Trailler URL</label>
+                    <input asp-for="TraillerUrl" class="form-control">
+                    <span asp-validation-for="TraillerUrl" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="ReleaseDate" class="form-label">Release Date</label>
+                    <input type="date" asp-for="ReleaseDate" class="form-control">
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="PosterImageFile" class="form-label">Poster Image</label>
+                    <input asp-for="PosterImageFile" class="form-control">
+                    <span asp-validation-for="PosterImageFile" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="ThumbnailFile" class="form-label">Thumbnail Image</label>
+                    <input asp-for="ThumbnailFile" class="form-control">
+                    <span asp-validation-for="ThumbnailFile" class="text-danger"></span>
+                </div>
+                <div class="mb-3" style="margin-right: 1000px">
+                    <label asp-for="VideoFile" class="form-label">Video</label>
+                    <input asp-for="VideoFile" class="form-control">
+                    <span asp-validation-for="VideoFile" class="text-danger"></span>
+                </div>
+               
+                <div class="mb-3 form-check">
+                    <input asp-for="IsDomestic" class="form-check-input">
+                    <label class="form-check-label" asp-for="IsDomestic">Is Domestic</label>
+                    <span asp-validation-for="IsDomestic" style="color: red"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CountryId" class="form-label">Country</label>
+                    <select class="form-select" aria-label="Default select example" asp-for="CountryId">
+                        @foreach (Country country in ViewBag.Countries)
+                        {
+                            <option value="@country.Id">@country.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CountryId" style="color: red"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="LanguageId" class="form-label">Language</label>
+                    <select class="form-select" aria-label="Default select example" asp-for="LanguageId">
+                        @foreach (Language language in ViewBag.Languages)
+                        {
+                            <option value="@language.Id">@language.LanguageName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="LanguageId" style="color: red"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="QualityId" class="form-label">Quality</label>
+                    <select class="form-select" aria-label="Default select example" asp-for="QualityId">
+                        @foreach (Quality quality in ViewBag.Qualities)
+                        {
+                            <option value="@quality.Id">@quality.QualityName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="QualityId" style="color: red"></span>
+                </div>
+                <hr class="border-bottom-danger"></hr>
+
+                <h4>Genres</h4>
+
+                <div class="mb-3">
+                    <label class="form-label ">Genres</label>
+                    <select class=" form-control" aria-label="Default select example" asp-for="GenresIds">
+                        @foreach (Genre genre in ViewBag.Genres)
+                        {
+                            <option value="@genre.Id">@genre.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="GenresIds" style="color: red"></span>
+                </div>
+                
+                <hr class="border-bottom-danger"></hr>
+
+                <button type="submit" class="btn btn-outline-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

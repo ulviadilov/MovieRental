@@ -1,0 +1,41 @@
+﻿@model List<About>
+@{
+    int counter = 0;
+}
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>About</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (About about in Model)
+                    {
+                        counter++;
+                        <tr>
+                            <th scope="row">@counter</th>
+                            <td>@about.MainTitle</td>
+                            <td>
+                                <div style="width:200px">
+                                    <img style="max-width:100%" src="~/uploads/about/@about.ImageUrl">
+                                </div>
+                            </td>
+                            <td>
+                                <a asp-action="update" asp-controller="about" asp-route-id="@about.Id" class="btn btn-outline-primary">Update</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

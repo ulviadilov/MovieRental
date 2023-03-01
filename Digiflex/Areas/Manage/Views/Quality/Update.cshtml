@@ -1,0 +1,17 @@
+﻿@model Quality
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <h1>Update Movie Quality</h1>
+            <form method="post" asp-action="update">
+                <div class="mb-3">
+                    <label asp-for="QualityName" class="form-label">Quality</label>
+                    <input asp-for="QualityName" class="form-control">
+                    <span asp-validation-for="QualityName" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
